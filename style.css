@@ -1,14 +1,12 @@
 body {
     text-align: center;
-    background-color: lightgray;
+    background: url(grass.jpg);
     font-family: 'Truculenta', sans-serif;
-    padding-top: 25px;
+
 }
 
 span.square {
     display: inline-block;
-
-
 
 }
 
@@ -17,15 +15,6 @@ span.square:hover, span.square *:hover {
 
 }
 
-.human-player {
-    outline: 3px solid black;
-    outline-offset: -3px;
-}
-
-.computer-player {
-    outline: 3px solid white;
-    outline-offset: -3px;
-}
 #square{
     grid-gap: 10px;
 }
@@ -38,3 +27,12 @@ span.square:hover, span.square *:hover {
 }
 
 
+.container{
+    border: 1px solid black;
+    width: 500px;
+    margin-top: 20px;
+    padding: 20px;
+    font-family: verdana;
+
+    background-color: darkseagreen;
+}

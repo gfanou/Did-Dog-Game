@@ -1,12 +1,13 @@
 
 $(document).ready(function() {
 
-    let numRowsNeeded = 5;
-    let numRowsCreated = 0;
 
-    while(numRowsCreated < numRowsNeeded)
+    let NUM_BONES = 5;
+    let NUM_BONESInitial = 0;
+
+    while(NUM_BONESInitial  < NUM_BONES)
     {
-        // begin creating a row of 7 squares
+        // begin creating a row of 5 squares
         let numSquaresNeeded = 5;
         let numSquaresCreated = 0;
 
@@ -21,7 +22,7 @@ $(document).ready(function() {
         $("div#board").append(breakTag);
 
         // add one to number of rows so far
-        numRowsCreated++;
+        NUM_BONESInitial++;
     }
 
     // while number of surprises successfully hidden < 5
@@ -34,43 +35,48 @@ $(document).ready(function() {
         let randomSquare = $("span.square").eq(randomNumber);
 
         // if the square does not already have a surprise
-        if (!randomSquare.hasClass("surprise")) {
+        if (!randomSquare.hasClass("bone")) {
 
             // hide a surprise
 
-            randomSquare.addClass("surprise");
-        }
+            randomSquare.addClass("bone");
 
+        }
         // add to number of surprises hidden
+        randomSquare++;
+
     }
 });
 
 function playerGuess() {
-    // find what span was clicked exactly
+     // find what span was clicked exactly
     let clickedSpan = $(this);
-    let isSurprise = clickedSpan.hasClass("surprise");
-    const numBone = 5;
-    let output = 0;
+    let isSurprise = clickedSpan.hasClass("bone");
+    let NUM_BONE = 5;
+    let remaining = 0;
     if (isSurprise === true) {
-        alert("You found a surprise!");
+        //alert("You found a bone!");
         clickedSpan.css("background-image", "url('bone.jpg')");
-        clickedSpan.css( "background-size", "100% 100%");
+        clickedSpan.css("background-size", "100% 100%");
         clickedSpan.off("click");
-        //let output = numBone -1;
-        for (let isSurprise = 0; isSurprise <= numBone; isSurprise++)
-        {
-            output = numBone - 1;
 
-            $("span#bRemaining").text(output);
+        for (let isSurprise = 0; isSurprise <= NUM_BONE; isSurprise++) {
+
+            remaining = NUM_BONE - 1;
+
+            let output = `${remaining}`;
+
+             $("span#bRemaining").text(output);
+
         }
+
+    } else if (isSurprise === false){
+        clickedSpan.css("background-color", "saddlebrown");
+
     }
 
-    else if (isSurprise === false){
-        clickedSpan.css("background-color", "brown");
+    };
 
-    }
-
-}
 
 
 function generateRandomBGColor() {
@@ -95,18 +101,12 @@ function createSquare() {
     square.height(70);
     square.width(70);
     square.addClass("square");
-
-    square.text("");
     let backgroundColor = generateRandomBGColor();
-
+    square.html("&nbsp;");
 
     square.css("background-color", backgroundColor);
     square.css("borderRadius", "10px");
-    square.css("borderColor", "black");
-
-    // square.css("background-image", "url('dog.jpg')");
-    // square.css( "background-size", "100% 100%");
-
+    square.css("border", "1px solid black");
 
     square.click(playerGuess);
 
@@ -115,7 +115,7 @@ function createSquare() {
     board.append(square);
 
 }
-function dangerMeter() {
+    function dangerMeter() {
     let dangerMeter = $("span#dangerMeter");
     let totalToGuess = 0;
     setInterval(function () {
@@ -123,4 +123,8 @@ function dangerMeter() {
         dangerMeter.css("width", totalToGuess + "%");
         dangerMeter.attr("aria-valuenow", totalToGuess);
     }, 500);
-}
+
+    }
+
+
+
